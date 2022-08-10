@@ -1,6 +1,8 @@
-{{ config(
+{{ config( alias= 'customer',
     schema= 'STAGE',
     database= 'RAW' 
 )}}
 
-SELECT * FROM "RAW"."RAW_SOURCE"."CUSTOMER"
+SELECT * 
+FROM {{ source('RAW_SOURCE', 'CUSTOMER') }} 
+Where C_NATIONKEY Not IN (14)
